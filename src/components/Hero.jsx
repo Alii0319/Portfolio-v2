@@ -207,7 +207,7 @@ def train_churn_model(data_path):
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="md:col-span-4 flex flex-col items-center md:items-start mt-24"
+            className="md:col-span-4 flex flex-col items-center md:items-start mt-0"
           >
             {/* Stunning glow-border wrapper */}
             <div className="relative group w-[180px] sm:w-[200px] md:w-full aspect-square">
