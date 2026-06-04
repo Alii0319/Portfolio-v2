@@ -7,7 +7,7 @@ export default function Experience() {
       role: 'Backend Developer Intern',
       company: 'Enigmatix',
       location: 'Bahawalpur, Pakistan',
-      duration: '10 Months (On-site/Hybrid)',
+      duration: '6 Months (On-site)',
       bullets: [
         'Reduced manual processing time by 30% by engineering 5+ Django REST API modules and CRUD systems using Python, SQLite, and Oracle.',
         'Improved database query performance by 25% by designing and optimizing Django ORM models, enhancing backend data reliability and response speed.',
