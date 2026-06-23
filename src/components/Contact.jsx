@@ -236,7 +236,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-indigo-glow to-purple-glow hover:from-indigo-600 hover:to-purple-600 disabled:from-indigo-900 disabled:to-purple-900 text-white rounded-xl font-medium shadow-lg transition-all duration-300 hover:scale-[1.01]"
+                className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-indigo-glow to-purple-glow hover:from-indigo-600 hover:to-purple-600 disabled:from-indigo-900 disabled:to-purple-900 text-white rounded-xl font-medium shadow-lg transition-all duration-300 hover:scale-[1.01] disabled:cursor-not-allowed disabled:hover:scale-100 disabled:pointer-events-none"
               >
                 {isLoading ? (
                   <>

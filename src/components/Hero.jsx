@@ -224,14 +224,14 @@ def train_churn_model(data_path):
                 <img
                   src="/ali_raza.jpg"
                   alt="Ali Raza"
-                  className="w-full h-full object-cover grayscale brightness-90 contrast-110 saturate-[0.8] group-hover:grayscale-0 group-hover:brightness-100 group-hover:contrast-100 group-hover:saturate-100 transition-all duration-500"
+                  className="w-full h-full object-cover profile-pic"
                 />
                 
                 {/* Glassmorphism Glare/Shine Effect */}
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
                 
                 {/* Cool Deep-Slate Tint Overlay (blends image into midnight backdrop) */}
-                <div className="absolute inset-0 bg-midnight/20 mix-blend-overlay group-hover:bg-transparent transition-colors duration-500 pointer-events-none" />
+                <div className="absolute inset-0 profile-overlay pointer-events-none" />
               </motion.div>
             </div>
 
