@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Mail, Phone, MapPin, Send, Loader2, CheckCircle, AlertCircle, ArrowUpRight } from 'lucide-react';
 import emailjs from '@emailjs/browser';
@@ -43,10 +43,10 @@ export default function Contact() {
 
     emailjs
       .send(
-        'service_s9cgqan',
-        'template_ewcd56w',
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
         templateParams,
-        '1Hl5HiR08BG1hdX6O'
+        EMAILJS_PUBLIC_KEY
       )
       .then((response) => {
         console.log('SUCCESS!', response.status, response.text);
@@ -137,7 +137,7 @@ export default function Contact() {
           </div>
 
           {/* DevOps Accent Codebox decoration */}
-          <div className="p-4 rounded-xl bg-black/30 border border-white/5 font-mono text-[10px] text-gray-500 space-y-1 mt-6">
+          <div className="p-4 rounded-xl bg-black/5 dark:bg-black/30 border border-white/5 font-mono text-[10px] text-gray-400 space-y-1 mt-6">
             <div><span className="text-cyan-glow">ali_raza</span> = {"{"}</div>
             <div className="pl-4">"role": "Software Engineer (Backend/ML)",</div>
             <div className="pl-4">"availability": "Internship / Full-time",</div>
@@ -166,8 +166,9 @@ export default function Contact() {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-black/20 border border-white/10 hover:border-white/20 focus:border-indigo-glow focus:ring-1 focus:ring-indigo-glow text-white text-sm outline-none transition-all font-sans"
+                  className="w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-black/20 border border-white/10 hover:border-white/20 focus:border-indigo-glow focus:ring-1 focus:ring-indigo-glow text-white text-sm outline-none transition-all font-sans placeholder:text-gray-400"
                   placeholder="John Doe"
+                  autoComplete="name"
                 />
               </div>
 
@@ -183,8 +184,9 @@ export default function Contact() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-black/20 border border-white/10 hover:border-white/20 focus:border-indigo-glow focus:ring-1 focus:ring-indigo-glow text-white text-sm outline-none transition-all font-sans"
+                  className="w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-black/20 border border-white/10 hover:border-white/20 focus:border-indigo-glow focus:ring-1 focus:ring-indigo-glow text-white text-sm outline-none transition-all font-sans placeholder:text-gray-400"
                   placeholder="john.doe@company.com"
+                  autoComplete="email"
                 />
               </div>
 
@@ -200,7 +202,7 @@ export default function Contact() {
                   rows="4"
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-black/20 border border-white/10 hover:border-white/20 focus:border-indigo-glow focus:ring-1 focus:ring-indigo-glow text-white text-sm outline-none transition-all font-sans resize-none"
+                  className="w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-black/20 border border-white/10 hover:border-white/20 focus:border-indigo-glow focus:ring-1 focus:ring-indigo-glow text-white text-sm outline-none transition-all font-sans resize-none placeholder:text-gray-400"
                   placeholder="Hi Ali, we are looking for a backend developer intern..."
                 />
               </div>
@@ -236,11 +238,11 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-indigo-glow to-purple-glow hover:from-indigo-600 hover:to-purple-600 disabled:from-indigo-900 disabled:to-purple-900 text-white rounded-xl font-medium shadow-lg transition-all duration-300 hover:scale-[1.01] disabled:cursor-not-allowed disabled:hover:scale-100 disabled:pointer-events-none"
+                className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-indigo-glow to-purple-glow hover:from-indigo-600 hover:to-purple-600 disabled:from-indigo-900 disabled:to-purple-900 text-neutral-50 rounded-xl font-medium shadow-lg transition-all duration-300 hover:scale-[1.01] disabled:cursor-not-allowed disabled:hover:scale-100 disabled:pointer-events-none cursor-pointer"
               >
                 {isLoading ? (
                   <>
-                    <Loader2 size={18} className="animate-spin text-white" />
+                    <Loader2 size={18} className="animate-spin text-neutral-50" />
                     <span>Transmitting data...</span>
                   </>
                 ) : (

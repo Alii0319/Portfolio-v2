@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Server, Cpu, Layers, GitBranch, ArrowUpRight } from 'lucide-react';
+import { Server, Cpu, Layers } from 'lucide-react';
 import { Github } from './BrandIcons';
 
 export default function Projects() {
@@ -115,9 +115,9 @@ export default function Projects() {
         <div className="flex items-center self-start md:self-end bg-slate-dark border border-white/5 p-1 rounded-xl">
           <button
             onClick={() => setFilter('all')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 cursor-pointer ${
               filter === 'all'
-                ? 'bg-gradient-to-r from-indigo-glow to-purple-glow text-white'
+                ? 'bg-gradient-to-r from-indigo-glow to-purple-glow text-neutral-50'
                 : 'text-gray-400 hover:text-white'
             }`}
           >
@@ -125,9 +125,9 @@ export default function Projects() {
           </button>
           <button
             onClick={() => setFilter('backend')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 cursor-pointer ${
               filter === 'backend'
-                ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
+                ? 'bg-cyan-500/20 text-cyan-600 dark:text-cyan-300 border border-cyan-500/30'
                 : 'text-gray-400 hover:text-white'
             }`}
           >
@@ -135,9 +135,9 @@ export default function Projects() {
           </button>
           <button
             onClick={() => setFilter('ml')}
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 cursor-pointer ${
               filter === 'ml'
-                ? 'bg-purple-500/20 text-purple-300 border border-purple-500/30'
+                ? 'bg-purple-500/20 text-purple-600 dark:text-purple-300 border border-purple-500/30'
                 : 'text-gray-400 hover:text-white'
             }`}
           >
@@ -163,7 +163,7 @@ export default function Projects() {
               className={`glass-card rounded-2xl overflow-hidden border border-white/5 transition-all duration-300 flex flex-col justify-between ${project.glowClass}`}
             >
               {/* Card Banner Background Gradient */}
-              <div className="relative h-28 w-full bg-gradient-to-br from-slate-dark to-slate-900 border-b border-white/5 flex items-center justify-between px-6">
+              <div className="relative h-28 w-full bg-gradient-to-br from-slate-dark to-slate-card border-b border-white/5 flex items-center justify-between px-6">
                 <div className={`absolute inset-0 bg-gradient-to-tr ${project.accentColor} opacity-[0.15]`} />
                 
                 {/* Icon Circle */}
@@ -189,8 +189,8 @@ export default function Projects() {
                 </p>
 
                 {/* Metrics Highlight Badge */}
-                <div className="mb-6 p-2.5 rounded-lg bg-black/20 border border-white/5 text-[11px] font-mono text-gray-300 flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-indigo-glow" />
+                <div className="mb-6 p-2.5 rounded-lg bg-black/5 dark:bg-black/20 border border-white/5 text-[11px] font-mono text-gray-300 flex items-center gap-1.5">
+                  <span className={`w-1.5 h-1.5 rounded-full ${project.category === 'backend' ? 'bg-cyan-glow' : 'bg-purple-glow'}`} />
                   <span>{project.metrics}</span>
                 </div>
 
@@ -199,7 +199,11 @@ export default function Projects() {
                   {project.tech.map((t) => (
                     <span
                       key={t}
-                      className="px-2 py-1 rounded-md bg-white/5 border border-white/5 text-[10px] font-mono text-gray-400"
+                      className={`px-2 py-1 rounded-md bg-white/5 border border-white/5 text-[10px] font-mono text-gray-400 transition-all duration-200 cursor-default ${
+                        project.category === 'backend' 
+                          ? 'hover:border-cyan-glow/30 hover:bg-cyan-glow/5 hover:text-cyan-glow' 
+                          : 'hover:border-purple-glow/30 hover:bg-purple-glow/5 hover:text-purple-glow'
+                      }`}
                     >
                       {t}
                     </span>

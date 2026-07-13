@@ -1,6 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal, Download, ArrowRight, Play, Server, Cpu, Database } from 'lucide-react';
+
+const roles = [
+  'Backend (Django / DRF)',
+  'DevOps & Infrastructure',
+  'Machine Learning Engineer',
+  'Full-Stack Developer'
+];
 
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0);
@@ -9,13 +16,6 @@ export default function Hero() {
   const [activeTab, setActiveTab] = useState('backend'); // 'backend' | 'ml'
   const [terminalOutput, setTerminalOutput] = useState('');
   const [isCompiling, setIsCompiling] = useState(false);
-
-  const roles = [
-    'Backend (Django / DRF)',
-    'DevOps & Infrastructure',
-    'Machine Learning Engineer',
-    'Full-Stack Developer'
-  ];
 
   // Typewriter effect
   useEffect(() => {
@@ -133,10 +133,6 @@ def train_churn_model(data_path):
     }, 500);
   };
 
-  useEffect(() => {
-    setTerminalOutput('');
-  }, [activeTab]);
-
   const handleContactClick = (e) => {
     e.preventDefault();
     const target = document.querySelector('#contact');
@@ -170,7 +166,7 @@ def train_churn_model(data_path):
     html = html.replace(/(#.*)/g, '<span class="text-gray-500 italic">$1</span>');
 
     // 3. Strings
-    html = html.replace(/(?<!class=")(?<!text-)(["\'][^"\'\n]*["\'])/g, '<span class="text-emerald-400 font-sans">$1</span>');
+    html = html.replace(/(?<!class=")(?<!text-)(["'][^"'\n]*["'])/g, '<span class="text-emerald-400 font-sans">$1</span>');
 
     // 4. Function/Class declarations
     html = html.replace(/\b(def|class)\s+(\w+)/g, '<span class="text-rose-400">$1</span> <span class="text-cyan-glow font-bold">$2</span>');
@@ -308,7 +304,7 @@ def train_churn_model(data_path):
                 download="Ali_Raza_Backend.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-indigo-glow to-purple-glow hover:from-indigo-600 hover:to-purple-600 text-white rounded-xl font-medium shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/30 transition-all duration-350 hover:scale-[1.02]"
+                className="flex items-center gap-2 px-6 py-3.5 bg-gradient-to-r from-indigo-glow to-purple-glow hover:from-indigo-600 hover:to-purple-600 text-neutral-50 rounded-xl font-medium shadow-lg shadow-indigo-500/20 hover:shadow-indigo-500/30 transition-all duration-350 hover:scale-[1.02] cursor-pointer"
               >
                 <Download size={18} />
                 Download Resume
@@ -365,9 +361,9 @@ def train_churn_model(data_path):
           {/* Accent decoration rings */}
           <div className="absolute inset-0 bg-indigo-500/10 rounded-2xl blur-3xl opacity-30 -z-10" />
 
-          <div className="glass-card rounded-2xl overflow-hidden shadow-2xl border border-white/10 flex flex-col w-full h-[480px]">
+          <div className="bg-[#0b0f19]/95 backdrop-blur-md rounded-2xl overflow-hidden shadow-2xl border border-neutral-800 flex flex-col w-full h-[480px]">
             {/* Terminal Top Window Bar */}
-            <div className="bg-slate-dark/80 px-4 py-3 flex items-center justify-between border-b border-white/5">
+            <div className="bg-neutral-900/80 px-4 py-3 flex items-center justify-between border-b border-neutral-800/60">
               <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-rose-500/80" />
                 <div className="w-3 h-3 rounded-full bg-amber-500/80" />
@@ -377,36 +373,36 @@ def train_churn_model(data_path):
               {/* Terminal Code Tab Selectors */}
               <div className="flex gap-2">
                 <button
-                  onClick={() => setActiveTab('backend')}
-                  className={`px-3 py-1 rounded-md text-xs font-mono transition-all duration-300 ${
+                  onClick={() => { setActiveTab('backend'); setTerminalOutput(''); }}
+                  className={`px-3 py-1 rounded-md text-xs font-mono transition-all duration-300 cursor-pointer ${
                     activeTab === 'backend'
                       ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30'
-                      : 'text-gray-500 hover:text-gray-300'
+                      : 'text-neutral-500 hover:text-neutral-300'
                   }`}
                 >
                   analytics_views.py
                 </button>
                 <button
-                  onClick={() => setActiveTab('ml')}
-                  className={`px-3 py-1 rounded-md text-xs font-mono transition-all duration-300 ${
+                  onClick={() => { setActiveTab('ml'); setTerminalOutput(''); }}
+                  className={`px-3 py-1 rounded-md text-xs font-mono transition-all duration-300 cursor-pointer ${
                     activeTab === 'ml'
                       ? 'bg-purple-500/10 text-purple-400 border border-purple-500/30'
-                      : 'text-gray-500 hover:text-gray-300'
+                      : 'text-neutral-500 hover:text-neutral-300'
                   }`}
                 >
                   churn_model.py
                 </button>
               </div>
 
-              <div className="flex items-center gap-1.5 text-xs text-gray-500 font-mono">
+              <div className="flex items-center gap-1.5 text-xs text-neutral-500 font-mono">
                 <Terminal size={14} />
                 <span>bash</span>
               </div>
             </div>
 
             {/* Terminal File Editor Body */}
-            <div className="p-4 flex-1 overflow-auto font-mono text-[11px] leading-[1.4] text-left select-none relative bg-midnight/40">
-              <pre className="text-gray-300" dangerouslySetInnerHTML={getHighlightedCode()} />
+            <div className="p-4 flex-1 overflow-auto font-mono text-[11px] leading-[1.4] text-left select-none relative bg-neutral-950/40">
+              <pre className="text-neutral-300" dangerouslySetInnerHTML={getHighlightedCode()} />
 
               {/* Run Terminal Code Execution Area */}
               <AnimatePresence>
@@ -415,7 +411,7 @@ def train_churn_model(data_path):
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
-                    className="mt-4 pt-4 border-t border-white/5 text-gray-400 bg-black/40 p-2.5 rounded-lg border border-white/5 font-mono text-[10px] min-h-[90px]"
+                    className="mt-4 pt-4 border-t border-neutral-800/60 text-neutral-400 bg-black/40 p-2.5 rounded-lg border border-neutral-800/60 font-mono text-[10px] min-h-[90px]"
                   >
                     <div className="text-[10px] text-indigo-400 mb-1">$ python runner.py</div>
                     <pre className="whitespace-pre-wrap flex items-center flex-wrap">
@@ -428,15 +424,15 @@ def train_churn_model(data_path):
             </div>
 
             {/* Run Button Footer */}
-            <div className="bg-slate-dark/70 p-3 border-t border-white/5 flex items-center justify-between">
-              <span className="text-[10px] text-gray-500 font-mono">
+            <div className="bg-neutral-900/70 p-3 border-t border-neutral-800/60 flex items-center justify-between">
+              <span className="text-[10px] text-neutral-500 font-mono">
                 Line Count: {activeTab === 'backend' ? '25' : '32'}
               </span>
               
               <button
                 onClick={runSimulation}
                 disabled={isCompiling}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-300 ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-medium transition-all duration-300 cursor-pointer ${
                   activeTab === 'backend'
                     ? 'bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 hover:bg-cyan-500/20'
                     : 'bg-purple-500/10 text-purple-400 border border-purple-500/30 hover:bg-purple-500/20'

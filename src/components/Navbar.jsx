@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Mail, Menu, X, Terminal } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Mail, Menu, X, Terminal, Sun, Moon } from 'lucide-react';
 import { Github, Linkedin } from './BrandIcons';
 
-export default function Navbar() {
+export default function Navbar({ theme, toggleTheme }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
@@ -61,115 +61,157 @@ export default function Navbar() {
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-midnight/70 backdrop-blur-md border-b border-white/5 py-4 shadow-lg shadow-black/20'
-          : 'bg-transparent py-6 border-b border-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between">
-          {/* Logo / Branding */}
-          <a
-            href="#hero"
-            onClick={(e) => handleLinkClick(e, '#hero')}
-            className="flex items-center gap-2 group font-mono font-bold text-lg text-white"
-          >
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-glow to-cyan-glow flex items-center justify-center shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300">
-              <Terminal size={16} className="text-white" />
-            </div>
-            <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent group-hover:to-white transition-all duration-300">
-              ali_raza<span className="text-indigo-glow">.py</span>
-            </span>
-          </a>
-
-          {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center gap-8">
-            <div className="flex items-center gap-6">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleLinkClick(e, link.href)}
-                  className={`text-sm font-medium transition-all duration-300 relative py-1 ${
-                    activeSection === link.id
-                      ? 'text-white'
-                      : 'text-gray-400 hover:text-white'
-                  }`}
-                >
-                  {link.name}
-                  {activeSection === link.id && (
-                    <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-indigo-glow to-cyan-glow rounded-full" />
-                  )}
-                </a>
-              ))}
-            </div>
-
-            {/* Glowing System Status Indicator */}
-            <div className="h-4 w-[1px] bg-white/10" />
-
-            <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>sys_status: operational</span>
-            </div>
-          </div>
-
-          {/* Socials Link Drawer (Desktop) */}
-          <div className="hidden md:flex items-center gap-3">
+    <>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? 'bg-midnight/70 backdrop-blur-md border-b border-white/5 py-4 shadow-lg shadow-black/20'
+            : 'bg-transparent py-6 border-b border-transparent'
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between">
+            {/* Logo / Branding */}
             <a
-              href="https://github.com/Alii0319"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 hover:border-white/10 transition-all duration-300"
-              aria-label="GitHub"
+              href="#hero"
+              onClick={(e) => handleLinkClick(e, '#hero')}
+              className="flex items-center gap-2 group font-mono font-bold text-lg text-white"
             >
-              <Github size={18} />
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-glow to-cyan-glow flex items-center justify-center shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300">
+                <Terminal size={16} className="text-white" />
+              </div>
+              <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent group-hover:to-white transition-all duration-300">
+                ali_raza<span className="text-indigo-glow">.py</span>
+              </span>
             </a>
-            <a
-              href="https://linkedin.com/in/ali-raza-8a68372aa"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 hover:border-white/10 transition-all duration-300"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={18} />
-            </a>
-            <a
-              href="mailto:alirazaa0319@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 hover:border-white/10 transition-all duration-300"
-              aria-label="Email"
-            >
-              <Mail size={18} />
-            </a>
-          </div>
 
-          {/* Mobile Menu Button */}
-          <div className="flex items-center md:hidden gap-3">
-            <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-full border border-emerald-500/20">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>online</span>
+            {/* Desktop Navigation Links */}
+            <div className="hidden md:flex items-center gap-8">
+              <div className="flex items-center gap-6">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => handleLinkClick(e, link.href)}
+                    className={`text-sm font-medium transition-all duration-300 relative py-1 ${
+                      activeSection === link.id
+                        ? 'text-white'
+                        : 'text-gray-400 hover:text-white'
+                    }`}
+                  >
+                    {link.name}
+                    {activeSection === link.id && (
+                      <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-indigo-glow to-cyan-glow rounded-full" />
+                    )}
+                  </a>
+                ))}
+              </div>
+
+              {/* Glowing System Status Indicator */}
+              <div className="h-4 w-[1px] bg-white/10" />
+
+              <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span>sys_status: operational</span>
+              </div>
             </div>
-            
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 transition-all duration-200"
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+
+            {/* Socials Link Drawer (Desktop) */}
+            <div className="hidden md:flex items-center gap-3">
+              <a
+                href="https://github.com/Alii0319"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 hover:border-white/10 transition-all duration-300"
+                aria-label="GitHub"
+              >
+                <Github size={18} />
+              </a>
+              <a
+                href="https://linkedin.com/in/ali-raza-8a68372aa"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 hover:border-white/10 transition-all duration-300"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={18} />
+              </a>
+              <a
+                href="mailto:alirazaa0319@gmail.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 hover:border-white/10 transition-all duration-300"
+                aria-label="Email"
+              >
+                <Mail size={18} />
+              </a>
+
+              {/* Divider */}
+              <div className="h-4 w-[1px] bg-white/10" />
+
+              {/* Theme Toggle Button */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 hover:border-white/10 transition-all duration-300 cursor-pointer"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? (
+                  <Sun size={18} className="text-amber-400 transition-transform duration-500 hover:rotate-45" />
+                ) : (
+                  <Moon size={18} className="text-indigo-glow transition-transform duration-500 hover:-rotate-12" />
+                )}
+              </button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="flex items-center md:hidden gap-2">
+              {/* Theme Toggle Button (Mobile) */}
+              <button
+                onClick={toggleTheme}
+                className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 transition-all duration-200 cursor-pointer"
+                aria-label="Toggle theme"
+              >
+                {theme === 'dark' ? (
+                  <Sun size={18} className="text-amber-400" />
+                ) : (
+                  <Moon size={18} className="text-indigo-glow" />
+                )}
+              </button>
+
+              <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-full border border-emerald-500/20">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span>online</span>
+              </div>
+              
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 transition-all duration-200"
+                aria-label="Toggle menu"
+              >
+                {isOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </nav>
+
+      {/* Backdrop Overlay when mobile drawer is open */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 z-30 bg-black/40 dark:bg-black/60 backdrop-blur-xs md:hidden"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
 
       {/* Mobile Drawer */}
       <div
-        className={`fixed inset-y-0 right-0 z-40 w-64 bg-slate-dark/95 backdrop-blur-lg border-l border-white/5 p-6 shadow-2xl transition-transform duration-300 md:hidden flex flex-col justify-between ${
+        className={`fixed inset-y-0 right-0 z-40 w-64 border-l border-white/5 p-6 shadow-2xl transition-transform duration-300 md:hidden flex flex-col justify-between ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
-        style={{ top: scrolled ? '69px' : '81px' }}
+        style={{ 
+          top: scrolled ? '69px' : '81px',
+          backgroundColor: theme === 'light' ? '#f3f4f6' : '#0b0f19'
+        }}
       >
         <div className="flex flex-col gap-6 mt-4">
           {navLinks.map((link) => (
@@ -222,6 +264,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-    </nav>
+    </>
   );
 }

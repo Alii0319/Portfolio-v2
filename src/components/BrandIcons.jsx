@@ -1,4 +1,3 @@
-import React from 'react';
 
 export function Github({ size = 20, className = "" }) {
   return (

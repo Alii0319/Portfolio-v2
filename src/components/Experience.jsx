@@ -1,4 +1,3 @@
-import React from 'react';
 import { Briefcase, GraduationCap, Award, Languages, Calendar, MapPin, CheckCircle2 } from 'lucide-react';
 
 export default function Experience() {
@@ -68,14 +67,12 @@ export default function Experience() {
             <h4 className="text-xl font-bold text-white">Work Experience</h4>
           </div>
 
-          <div className="space-y-8 relative before:absolute before:inset-y-1 before:left-3.5 before:w-[1px] before:bg-white/10">
+          <div className="space-y-8 relative before:absolute before:inset-y-1 before:left-3.5 before:w-[1px] before:bg-black/10 dark:before:bg-white/10">
             {experiences.map((exp, idx) => (
               <div key={idx} className="relative pl-10 group">
                 
-                {/* Timeline node icon */}
-                <div className="absolute left-0 top-1 w-7 h-7 rounded-full bg-slate-dark border-2 border-indigo-glow flex items-center justify-center text-indigo-glow group-hover:scale-110 transition-transform duration-200">
-                  <Briefcase size={12} />
-                </div>
+                {/* Timeline node dot */}
+                <div className="absolute left-[9px] top-3.5 w-3 h-3 rounded-full bg-indigo-glow border border-midnight group-hover:scale-125 transition-transform duration-300 shadow-[0_0_8px_rgba(99,102,241,0.3)]" />
 
                 {/* Experience Card */}
                 <div className="glass-card p-6 rounded-2xl border border-white/5 space-y-4 hover:border-indigo-glow/20 transition-all duration-300">
@@ -98,7 +95,7 @@ export default function Experience() {
                   </div>
 
                   {/* Highlight Metrics */}
-                  <div className="grid grid-cols-3 gap-3 bg-black/20 p-3.5 rounded-xl border border-white/5">
+                  <div className="grid grid-cols-3 gap-3 bg-black/5 dark:bg-black/20 p-3.5 rounded-xl border border-white/5">
                     {exp.metrics.map((metric, mIdx) => (
                       <div key={mIdx} className="text-center">
                         <span className="block text-lg sm:text-xl font-bold font-mono text-cyan-glow">{metric.value}</span>
@@ -154,7 +151,7 @@ export default function Experience() {
                 <span className="text-xs text-gray-500 font-mono block mb-3 uppercase">Academic Focus Areas:</span>
                 <div className="flex flex-wrap gap-2">
                   {education.focus.map((item, idx) => (
-                    <span key={idx} className="px-2.5 py-1 rounded-lg bg-white/5 border border-white/5 text-[11px] text-gray-300">
+                    <span key={idx} className="px-2.5 py-1 rounded-lg bg-purple-500/5 border border-purple-500/10 hover:border-purple-500/20 hover:bg-purple-500/10 text-[11px] text-gray-300 transition-all duration-200 cursor-default">
                       {item}
                     </span>
                   ))}
@@ -176,9 +173,12 @@ export default function Experience() {
             <div className="glass-card p-6 rounded-2xl border border-white/5 space-y-3.5 hover:border-amber-400/20 transition-all duration-300">
               <div className="flex flex-col gap-2.5">
                 {certifications.map((cert, idx) => (
-                  <div key={idx} className="flex items-center gap-3 text-sm text-gray-300">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 shrink-0" />
-                    <span className="font-medium leading-tight">{cert}</span>
+                  <div 
+                    key={idx} 
+                    className="flex items-center gap-3 p-2.5 rounded-xl bg-black/[0.01] dark:bg-white/[0.01] hover:bg-amber-500/[0.03] border border-white/5 hover:border-amber-500/20 text-sm text-gray-300 transition-all duration-200 cursor-default group/cert"
+                  >
+                    <Award size={14} className="text-amber-500 opacity-60 group-hover/cert:opacity-100 transition-opacity shrink-0" />
+                    <span className="font-medium leading-tight group-hover/cert:text-white transition-colors">{cert}</span>
                   </div>
                 ))}
               </div>
@@ -196,12 +196,12 @@ export default function Experience() {
 
             {/* Languages Card */}
             <div className="glass-card p-6 rounded-2xl border border-white/5 flex gap-4 hover:border-cyan-glow/20 transition-all duration-300">
-              <div className="flex-1 text-center bg-black/20 p-3 rounded-xl border border-white/5">
-                <span className="text-sm font-mono font-bold text-white block">English</span>
+              <div className="flex-1 text-center bg-black/5 dark:bg-black/20 hover:bg-cyan-glow/[0.02] p-3 rounded-xl border border-white/5 hover:border-cyan-glow/20 transition-all duration-350 group/lang cursor-default">
+                <span className="text-sm font-mono font-bold text-white block group-hover/lang:text-cyan-glow transition-colors">English</span>
                 <span className="text-xs text-gray-500 font-medium">Professional</span>
               </div>
-              <div className="flex-1 text-center bg-black/20 p-3 rounded-xl border border-white/5">
-                <span className="text-sm font-mono font-bold text-white block">Urdu</span>
+              <div className="flex-1 text-center bg-black/5 dark:bg-black/20 hover:bg-cyan-glow/[0.02] p-3 rounded-xl border border-white/5 hover:border-cyan-glow/20 transition-all duration-350 group/lang cursor-default">
+                <span className="text-sm font-mono font-bold text-white block group-hover/lang:text-cyan-glow transition-colors">Urdu</span>
                 <span className="text-xs text-gray-500 font-medium">Native / Bilingual</span>
               </div>
             </div>

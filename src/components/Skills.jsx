@@ -4,7 +4,7 @@ import {
   Code, Server, Database, Terminal, Cpu, Monitor, Zap, Box, Boxes, 
   Activity, GitBranch, Globe, Settings, Sliders, Table, 
   Binary, Search, Paintbrush, RefreshCw, Route, Brain, TrendingUp, 
-  BarChart3, LineChart, ChevronRight, Cloud, MessageSquare, Eye 
+  BarChart3, LineChart, Cloud, MessageSquare, Eye 
 } from 'lucide-react';
 
 export default function Skills() {
@@ -15,15 +15,16 @@ export default function Skills() {
       icon: <Server className="text-cyan-glow animate-pulse-slow" size={24} />,
       desc: 'Architecting robust, secure API layers, asynchronous task routing, and scalable services.',
       gridClass: 'md:col-span-6 lg:col-span-6',
-      borderStyle: 'glow-cyan',
+      borderStyle: 'hover:border-cyan-glow/30 hover:bg-cyan-glow/[0.01]',
       accentColor: 'text-cyan-glow',
+      pillHoverClass: 'hover:border-cyan-glow/30 hover:bg-cyan-glow/5',
       skills: [
-        { name: 'Python', icon: <Code className="text-indigo-400" size={20} /> },
-        { name: 'Django', icon: <Server className="text-emerald-400" size={20} /> },
-        { name: 'Django REST (DRF)', icon: <Cpu className="text-cyan-400" size={20} /> },
-        { name: 'REST APIs', icon: <Globe className="text-blue-400" size={20} /> },
-        { name: 'CRUD Systems', icon: <Settings className="text-purple-400" size={20} /> },
-        { name: 'Gunicorn', icon: <Zap className="text-amber-400" size={20} /> },
+        { name: 'Python', icon: <Code size={20} /> },
+        { name: 'Django', icon: <Server size={20} /> },
+        { name: 'Django REST (DRF)', icon: <Cpu size={20} /> },
+        { name: 'REST APIs', icon: <Globe size={20} /> },
+        { name: 'CRUD Systems', icon: <Settings size={20} /> },
+        { name: 'Gunicorn', icon: <Zap size={20} /> },
       ],
     },
     {
@@ -32,18 +33,19 @@ export default function Skills() {
       icon: <Terminal className="text-emerald-400" size={24} />,
       desc: 'Container orchestrations, deployment pipelines, and operational environment automation.',
       gridClass: 'md:col-span-6 lg:col-span-6',
-      borderStyle: 'hover:border-emerald-400/30 hover:shadow-emerald-400/5',
+      borderStyle: 'hover:border-emerald-400/30 hover:bg-emerald-400/[0.01]',
       accentColor: 'text-emerald-400',
+      pillHoverClass: 'hover:border-emerald-500/30 hover:bg-emerald-500/5',
       skills: [
-        { name: 'Docker', icon: <Box className="text-blue-400" size={20} /> },
-        { name: 'Docker Compose', icon: <Boxes className="text-cyan-400" size={20} /> },
-        { name: 'AWS EC2', icon: <Cloud className="text-amber-500" size={20} /> },
-        { name: 'Celery Workers', icon: <Activity className="text-emerald-400" size={20} /> },
-        { name: 'Render Deploy', icon: <Globe className="text-teal-400" size={20} /> },
-        { name: 'Railway Deploy', icon: <Zap className="text-purple-400" size={20} /> },
-        { name: 'Git / GitHub', icon: <GitBranch className="text-rose-400" size={20} /> },
-        { name: 'Linux Systems', icon: <Terminal className="text-gray-400" size={20} /> },
-        { name: 'Vercel Deploy', icon: <Globe className="text-indigo-400" size={20} /> },
+        { name: 'Docker', icon: <Box size={20} /> },
+        { name: 'Docker Compose', icon: <Boxes size={20} /> },
+        { name: 'AWS EC2', icon: <Cloud size={20} /> },
+        { name: 'Celery Workers', icon: <Activity size={20} /> },
+        { name: 'Render Deploy', icon: <Globe size={20} /> },
+        { name: 'Railway Deploy', icon: <Zap size={20} /> },
+        { name: 'Git / GitHub', icon: <GitBranch size={20} /> },
+        { name: 'Linux Systems', icon: <Terminal size={20} /> },
+        { name: 'Vercel Deploy', icon: <Globe size={20} /> },
       ],
     },
     {
@@ -52,17 +54,18 @@ export default function Skills() {
       icon: <Database className="text-indigo-400" size={24} />,
       desc: 'Relational design, high reliability models, query optimization, and fast caching layers.',
       gridClass: 'md:col-span-6 lg:col-span-6',
-      borderStyle: 'hover:border-indigo-400/30 hover:shadow-indigo-400/5',
+      borderStyle: 'hover:border-indigo-400/30 hover:bg-indigo-400/[0.01]',
       accentColor: 'text-indigo-400',
+      pillHoverClass: 'hover:border-indigo-400/30 hover:bg-indigo-400/5',
       skills: [
-        { name: 'PostgreSQL', icon: <Database className="text-indigo-400" size={20} /> },
-        { name: 'MySQL', icon: <Database className="text-blue-500" size={20} /> },
-        { name: 'Redis Cache', icon: <Zap className="text-rose-500" size={20} /> },
-        { name: 'MongoDB', icon: <Database className="text-emerald-500" size={20} /> },
-        { name: 'SQLite', icon: <Database className="text-blue-300" size={20} /> },
-        { name: 'Oracle SQL', icon: <Database className="text-red-400" size={20} /> },
-        { name: 'DB Indexing', icon: <Sliders className="text-amber-400" size={20} /> },
-        { name: 'SQL Queries', icon: <Code className="text-cyan-400" size={20} /> },
+        { name: 'PostgreSQL', icon: <Database size={20} /> },
+        { name: 'MySQL', icon: <Database size={20} /> },
+        { name: 'Redis Cache', icon: <Zap size={20} /> },
+        { name: 'MongoDB', icon: <Database size={20} /> },
+        { name: 'SQLite', icon: <Database size={20} /> },
+        { name: 'Oracle SQL', icon: <Database size={20} /> },
+        { name: 'DB Indexing', icon: <Sliders size={20} /> },
+        { name: 'SQL Queries', icon: <Code size={20} /> },
       ],
     },
     {
@@ -71,21 +74,22 @@ export default function Skills() {
       icon: <Cpu className="text-purple-glow" size={24} />,
       desc: 'End-to-end training pipelines, scaling data imbalances, and classification benchmarks.',
       gridClass: 'md:col-span-6 lg:col-span-6',
-      borderStyle: 'glow-purple',
+      borderStyle: 'hover:border-purple-glow/30 hover:bg-purple-glow/[0.01]',
       accentColor: 'text-purple-glow',
+      pillHoverClass: 'hover:border-purple-glow/30 hover:bg-purple-glow/5',
       skills: [
-        { name: 'TensorFlow', icon: <Cpu className="text-orange-500" size={20} /> },
-        { name: 'scikit-learn', icon: <Brain className="text-purple-400" size={20} /> },
-        { name: 'XGBoost', icon: <TrendingUp className="text-emerald-400" size={20} /> },
-        { name: 'Computer Vision', icon: <Eye className="text-indigo-400" size={20} /> },
-        { name: 'NLP', icon: <MessageSquare className="text-cyan-400" size={20} /> },
-        { name: 'SMOTE Resampling', icon: <Sliders className="text-amber-400" size={20} /> },
-        { name: 'Model Eval', icon: <BarChart3 className="text-pink-400" size={20} /> },
-        { name: 'Feature Eng', icon: <Settings className="text-blue-400" size={20} /> },
-        { name: 'pandas', icon: <Table className="text-cyan-400" size={20} /> },
-        { name: 'NumPy', icon: <Binary className="text-indigo-400" size={20} /> },
-        { name: 'Matplotlib', icon: <LineChart className="text-purple-400" size={20} /> },
-        { name: 'EDA', icon: <Search className="text-teal-400" size={20} /> },
+        { name: 'TensorFlow', icon: <Cpu size={20} /> },
+        { name: 'scikit-learn', icon: <Brain size={20} /> },
+        { name: 'XGBoost', icon: <TrendingUp size={20} /> },
+        { name: 'Computer Vision', icon: <Eye size={20} /> },
+        { name: 'NLP', icon: <MessageSquare size={20} /> },
+        { name: 'SMOTE Resampling', icon: <Sliders size={20} /> },
+        { name: 'Model Eval', icon: <BarChart3 size={20} /> },
+        { name: 'Feature Eng', icon: <Settings size={20} /> },
+        { name: 'pandas', icon: <Table size={20} /> },
+        { name: 'NumPy', icon: <Binary size={20} /> },
+        { name: 'Matplotlib', icon: <LineChart size={20} /> },
+        { name: 'EDA', icon: <Search size={20} /> },
       ],
     },
     {
@@ -94,14 +98,15 @@ export default function Skills() {
       icon: <Monitor className="text-indigo-glow" size={24} />,
       desc: 'Responsive user interfaces consuming decoupled API servers and real-time state metrics.',
       gridClass: 'md:col-span-12 lg:col-span-12',
-      borderStyle: 'hover:border-indigo-glow/30 hover:shadow-indigo-glow/5',
+      borderStyle: 'hover:border-indigo-glow/30 hover:bg-indigo-glow/[0.01]',
       accentColor: 'text-indigo-glow',
+      pillHoverClass: 'hover:border-indigo-glow/30 hover:bg-indigo-glow/5',
       skills: [
-        { name: 'React 19', icon: <Cpu className="text-cyan-400" size={20} /> },
-        { name: 'Vite Bundler', icon: <Zap className="text-yellow-400" size={20} /> },
-        { name: 'TailwindCSS', icon: <Paintbrush className="text-teal-400" size={20} /> },
-        { name: 'Axios Client', icon: <RefreshCw className="text-indigo-400" size={20} /> },
-        { name: 'React Router', icon: <Route className="text-rose-400" size={20} /> },
+        { name: 'React 19', icon: <Cpu size={20} /> },
+        { name: 'Vite Bundler', icon: <Zap size={20} /> },
+        { name: 'TailwindCSS', icon: <Paintbrush size={20} /> },
+        { name: 'Axios Client', icon: <RefreshCw size={20} /> },
+        { name: 'React Router', icon: <Route size={20} /> },
       ],
     },
   ];
@@ -148,7 +153,7 @@ export default function Skills() {
           <motion.div
             key={category.id}
             variants={itemVariants}
-            className={`glass-card p-6 rounded-2xl border border-white/5 transition-all duration-300 flex flex-col justify-start ${category.gridClass} ${category.borderStyle}`}
+            className={`glass-card p-6 rounded-2xl border border-white/5 transition-all duration-300 flex flex-col justify-between ${category.gridClass} ${category.borderStyle}`}
           >
             <div>
               {/* Card Header */}
@@ -165,17 +170,19 @@ export default function Skills() {
               </p>
             </div>
 
-            {/* Structured Tile Grid for Skills */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 justify-center items-center w-full mt-2">
+            {/* 2026 Sleek Flex-wrapped Skill Badges */}
+            <div className="flex flex-wrap gap-2 pt-2">
               {category.skills.map((skill) => (
                 <div
                   key={skill.name}
-                  className="flex flex-col items-center justify-center text-center p-3 rounded-xl bg-white/5 border border-white/5 hover:border-white/10 hover:bg-white/10 hover:scale-[1.02] transition-all duration-200 h-full min-h-[96px]"
+                  className={`group/skill flex items-center gap-2 px-3 py-1.5 rounded-lg bg-black/[0.01] dark:bg-white/[0.02] border border-white/5 transition-all duration-200 cursor-default ${category.pillHoverClass}`}
                 >
-                  <div className="mb-2 p-2 rounded-lg bg-white/5 flex items-center justify-center border border-white/5">
-                    {skill.icon}
-                  </div>
-                  <span className="text-xs font-mono text-gray-300 font-semibold leading-tight">{skill.name}</span>
+                  <span className={`text-gray-500 transition-colors duration-200 group-hover/skill:${category.accentColor}`}>
+                    {React.cloneElement(skill.icon, { size: 14, className: 'transition-colors' })}
+                  </span>
+                  <span className="text-xs font-mono text-gray-400 group-hover/skill:text-white transition-colors duration-200">
+                    {skill.name}
+                  </span>
                 </div>
               ))}
             </div>
