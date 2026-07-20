@@ -1,72 +1,47 @@
-import { useState, useEffect } from 'react';
-import Background from './components/Background';
+import { useEffect, useState } from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Skills from './components/Skills';
-import Experience from './components/Experience';
 import Projects from './components/Projects';
+import Experience from './components/Experience';
+import Skills from './components/Skills';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
+const getInitialTheme = () => {
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light' || savedTheme === 'dark') return savedTheme;
+  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+};
+
 export default function App() {
-  const [theme, setTheme] = useState(() => {
-    const savedTheme = localStorage.getItem('theme');
-    return savedTheme || 'dark';
-  });
+  const [theme, setTheme] = useState(getInitialTheme);
 
   useEffect(() => {
-    const root = document.documentElement;
-    if (theme === 'light') {
-      root.classList.add('light');
-    } else {
-      root.classList.remove('light');
-    }
+    document.documentElement.classList.toggle('light', theme === 'light');
     localStorage.setItem('theme', theme);
+    document.querySelector('meta[name="theme-color"]')?.setAttribute(
+      'content',
+      theme === 'light' ? '#f7f8fb' : '#050a1b',
+    );
   }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
-
   return (
-    <div className="relative min-h-screen bg-midnight text-gray-100 overflow-x-hidden selection:bg-indigo-glow/30 selection:text-white">
-      {/* Dynamic particles / constellation backdrop */}
-      <Background />
+    <div className="min-h-screen bg-midnight text-gray-100">
+      <a href="#main-content" className="skip-link">Skip to content</a>
 
-      {/* Sticky header navbar */}
-      <Navbar theme={theme} toggleTheme={toggleTheme} />
+      <Navbar
+        theme={theme}
+        toggleTheme={() => setTheme((current) => (current === 'dark' ? 'light' : 'dark'))}
+      />
 
-      {/* Main Sections */}
-      <main className="relative z-10 w-full flex flex-col items-center">
+      <main id="main-content" tabIndex="-1">
         <Hero />
-        
-        {/* Section separators to match subtle terminal/backend style lines */}
-        <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-        </div>
-        
-        <Skills />
-
-        <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-        </div>
-
-        <Experience />
-
-        <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-        </div>
-
         <Projects />
-
-        <div className="w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-        </div>
-
+        <Experience />
+        <Skills />
         <Contact />
       </main>
 
-      {/* Footer info panel */}
       <Footer />
     </div>
   );

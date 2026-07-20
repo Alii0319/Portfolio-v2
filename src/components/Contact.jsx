@@ -1,259 +1,174 @@
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, Loader2, CheckCircle, AlertCircle, ArrowUpRight } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import { ArrowUpRight, Mail, MapPin, Send } from 'lucide-react';
 
-// ── EmailJS Credentials (confirmed production) ───────────────────────────
-const EMAILJS_SERVICE_ID  = 'service_s9cgqan';
+const EMAILJS_SERVICE_ID = 'service_s9cgqan';
 const EMAILJS_TEMPLATE_ID = 'template_ewcd56w';
-const EMAILJS_PUBLIC_KEY  = '1Hl5HiR08BG1hdX6O';
+const EMAILJS_PUBLIC_KEY = '1Hl5HiR08BG1hdX6O';
+
+const initialFormData = { name: '', email: '', message: '' };
 
 export default function Contact() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
+  const [formData, setFormData] = useState(initialFormData);
+  const [status, setStatus] = useState('idle');
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const handleChange = ({ target }) => {
+    setFormData((current) => ({ ...current, [target.name]: target.value }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setErrorMessage('');
-    setIsSuccess(false);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setStatus('loading');
 
-    const templateParams = {
-      sender_name:  formData.name,    // → {{sender_name}}
-      sender_email: formData.email,   // → {{sender_email}}
-      message:      formData.message, // → {{message}}
-      time: new Date().toLocaleString('en-US', {
-        timeZone:  'Asia/Karachi',
-        dateStyle: 'medium',
-        timeStyle: 'short',
-      }),                             // → {{time}}
-    };
-
-    emailjs
-      .send(
+    try {
+      await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
-        templateParams,
-        EMAILJS_PUBLIC_KEY
-      )
-      .then((response) => {
-        console.log('SUCCESS!', response.status, response.text);
-        setIsSuccess(true);
-        setFormData({ name: '', email: '', message: '' });
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        console.error('FAILED...', err);
-        setErrorMessage("Failed to send email. Please try again or email me directly at alirazaa0319@gmail.com.");
-        setIsLoading(false);
-      });
+        {
+          sender_name: formData.name.trim(),
+          sender_email: formData.email.trim(),
+          message: formData.message.trim(),
+          time: new Date().toLocaleString('en-US', {
+            timeZone: 'Asia/Karachi',
+            dateStyle: 'medium',
+            timeStyle: 'short',
+          }),
+        },
+        EMAILJS_PUBLIC_KEY,
+      );
+
+      setFormData(initialFormData);
+      setStatus('success');
+    } catch {
+      setStatus('error');
+    }
   };
 
   return (
-    <section id="contact" className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto relative z-10">
-      
-      {/* Title */}
-      <div className="text-center md:text-left mb-16">
-        <h2 className="text-xs font-mono tracking-widest text-indigo-glow uppercase mb-3">&lt;establish_connection /&gt;</h2>
-        <h3 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">Contact Me</h3>
-        <p className="text-gray-400 mt-2 max-w-xl">
-          Interested in an ML internship, a backend developer position, or collaborating on a project? Reach out directly.
-        </p>
-      </div>
-
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-stretch">
-        
-        {/* Left column - Info Details (5/12 grid) */}
-        <div className="lg:col-span-5 flex flex-col justify-between gap-6 text-left">
-          
-          <div className="space-y-6">
-            <h4 className="text-xl font-bold text-white mb-2">Connect Directly</h4>
-            <p className="text-gray-400 text-sm leading-relaxed">
-              Recruiters and developers are welcome to shoot a message via the form, ping my email, or ring my contact line.
-            </p>
-
-            <div className="space-y-4">
-              
-              {/* Email Card */}
-              <a
-                href="mailto:alirazaa0319@gmail.com"
-                className="flex items-center gap-4 p-4 rounded-xl bg-slate-dark/50 border border-white/5 hover:border-indigo-glow/20 transition-all duration-300 group"
-              >
-                <div className="p-3 rounded-lg bg-indigo-500/10 text-indigo-glow group-hover:bg-indigo-500/20 transition-colors">
-                  <Mail size={18} />
-                </div>
-                <div>
-                  <span className="block text-xs font-mono text-gray-500 uppercase">Email</span>
-                  <span className="text-sm font-semibold text-gray-300 group-hover:text-white transition-colors">
-                    alirazaa0319@gmail.com
-                  </span>
-                </div>
-                <ArrowUpRight size={14} className="text-gray-600 group-hover:text-white ml-auto transition-colors" />
-              </a>
-
-              {/* Phone Card */}
-              <a
-                href="tel:+923136799319"
-                className="flex items-center gap-4 p-4 rounded-xl bg-slate-dark/50 border border-white/5 hover:border-cyan-glow/20 transition-all duration-300 group"
-              >
-                <div className="p-3 rounded-lg bg-cyan-500/10 text-cyan-glow group-hover:bg-cyan-500/20 transition-colors">
-                  <Phone size={18} />
-                </div>
-                <div>
-                  <span className="block text-xs font-mono text-gray-500 uppercase">Phone</span>
-                  <span className="text-sm font-semibold text-gray-300 group-hover:text-white transition-colors">
-                    +92 313 6799319
-                  </span>
-                </div>
-                <ArrowUpRight size={14} className="text-gray-600 group-hover:text-white ml-auto transition-colors" />
-              </a>
-
-              {/* Location Card */}
-              <div className="flex items-center gap-4 p-4 rounded-xl bg-slate-dark/50 border border-white/5">
-                <div className="p-3 rounded-lg bg-purple-500/10 text-purple-glow">
-                  <MapPin size={18} />
-                </div>
-                <div>
-                  <span className="block text-xs font-mono text-gray-500 uppercase">Location</span>
-                  <span className="text-sm font-semibold text-gray-300">
-                    Bahawalpur, Punjab, Pakistan
-                  </span>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          {/* DevOps Accent Codebox decoration */}
-          <div className="p-4 rounded-xl bg-black/5 dark:bg-black/30 border border-white/5 font-mono text-[10px] text-gray-400 space-y-1 mt-6">
-            <div><span className="text-cyan-glow">ali_raza</span> = {"{"}</div>
-            <div className="pl-4">"role": "Software Engineer (Backend/ML)",</div>
-            <div className="pl-4">"availability": "Internship / Full-time",</div>
-            <div className="pl-4">"docker_status": "daemon_running",</div>
-            <div className="pl-4">"db_conn": "PostgreSQL_Active"</div>
-            <div>{"}"}</div>
-          </div>
+    <section id="contact" className="section-tinted scroll-mt-18">
+      <div className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-28">
+        <div className="section-heading">
+          <p className="section-eyebrow">Contact</p>
+          <h2 className="section-title">Let’s build something useful.</h2>
+          <p className="section-intro">
+            I’m interested in backend, automation, and data-focused engineering opportunities where thoughtful implementation matters.
+          </p>
         </div>
 
-        {/* Right column - Interactive Contact Form (7/12 grid) */}
-        <div className="lg:col-span-7">
-          <div className="glass-card p-8 rounded-2xl border border-white/5 h-full flex flex-col justify-center text-left">
-            <h4 className="text-xl font-bold text-white mb-6">Send an Encrypted Ping</h4>
-            
-            <form onSubmit={handleSubmit} className="space-y-5">
-              
-              {/* Name Field */}
+        <div className="contact-panel">
+          <div className="p-6 sm:p-8 lg:p-10">
+            <div className="hero-pill">
+              <span className="size-2 rounded-full bg-emerald-400" aria-hidden="true" />
+              Open to opportunities
+            </div>
+
+            <h3 className="mt-8 max-w-md text-3xl font-semibold tracking-[-0.03em] text-white">
+              Have a backend problem worth solving?
+            </h3>
+            <p className="mt-5 max-w-md leading-7 text-gray-400">
+              Email is the fastest way to reach me. For project context, include the goal, current stack, and where you need help.
+            </p>
+
+            <a
+              href="mailto:alirazaa0319@gmail.com"
+              className="mt-8 inline-flex max-w-full items-center gap-2 break-all text-lg font-semibold text-white hover:text-accent sm:text-xl"
+            >
+              <Mail size={19} className="shrink-0 text-accent" />
+              alirazaa0319@gmail.com
+              <ArrowUpRight size={17} className="shrink-0" />
+            </a>
+
+            <div className="mt-8 flex flex-wrap gap-3 text-sm">
+              <a href="https://github.com/Alii0319" target="_blank" rel="noopener noreferrer" className="contact-link">
+                GitHub <ArrowUpRight size={14} />
+              </a>
+              <a href="https://linkedin.com/in/ali-raza-8a68372aa" target="_blank" rel="noopener noreferrer" className="contact-link">
+                LinkedIn <ArrowUpRight size={14} />
+              </a>
+              <a href="tel:+923136799319" className="contact-link">+92 313 6799319</a>
+            </div>
+
+            <p className="mt-10 flex items-center gap-2 text-sm text-gray-500">
+              <MapPin size={15} /> Bahawalpur, Punjab, Pakistan
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="contact-form-card" aria-label="Contact form">
+            <div className="flex items-center justify-between gap-4 border-b border-border pb-5">
               <div>
-                <label htmlFor="name" className="block text-xs font-mono text-gray-500 uppercase mb-2">
-                  Name
-                </label>
+                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">Send a message</p>
+                <p className="mt-1 text-sm text-gray-500">I usually reply by email.</p>
+              </div>
+              <span className="flex size-10 items-center justify-center rounded-xl border border-border bg-midnight text-gray-400">
+                <Send size={17} />
+              </span>
+            </div>
+
+            <div className="mt-6 grid gap-5 sm:grid-cols-2">
+              <div>
+                <label htmlFor="name" className="form-label">Name</label>
                 <input
-                  type="text"
                   id="name"
                   name="name"
+                  type="text"
                   required
+                  maxLength="80"
+                  autoComplete="name"
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-black/20 border border-white/10 hover:border-white/20 focus:border-indigo-glow focus:ring-1 focus:ring-indigo-glow text-white text-sm outline-none transition-all font-sans placeholder:text-gray-400"
-                  placeholder="John Doe"
-                  autoComplete="name"
+                  className="form-field"
+                  placeholder="Your name"
                 />
               </div>
-
-              {/* Email Field */}
               <div>
-                <label htmlFor="email" className="block text-xs font-mono text-gray-500 uppercase mb-2">
-                  Email Address
-                </label>
+                <label htmlFor="email" className="form-label">Email</label>
                 <input
-                  type="email"
                   id="email"
                   name="email"
+                  type="email"
                   required
+                  maxLength="120"
+                  autoComplete="email"
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-black/20 border border-white/10 hover:border-white/20 focus:border-indigo-glow focus:ring-1 focus:ring-indigo-glow text-white text-sm outline-none transition-all font-sans placeholder:text-gray-400"
-                  placeholder="john.doe@company.com"
-                  autoComplete="email"
+                  className="form-field"
+                  placeholder="you@example.com"
                 />
               </div>
+            </div>
 
-              {/* Message Field */}
-              <div>
-                <label htmlFor="message" className="block text-xs font-mono text-gray-500 uppercase mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  required
-                  rows="4"
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 rounded-xl bg-black/5 dark:bg-black/20 border border-white/10 hover:border-white/20 focus:border-indigo-glow focus:ring-1 focus:ring-indigo-glow text-white text-sm outline-none transition-all font-sans resize-none placeholder:text-gray-400"
-                  placeholder="Hi Ali, we are looking for a backend developer intern..."
-                />
-              </div>
+            <div className="mt-5">
+              <label htmlFor="message" className="form-label">Message</label>
+              <textarea
+                id="message"
+                name="message"
+                required
+                maxLength="2000"
+                rows="6"
+                value={formData.message}
+                onChange={handleChange}
+                className="form-field resize-y"
+                placeholder="Tell me about the project or role."
+              />
+            </div>
 
-              {/* Status Notifications */}
-              <AnimatePresence mode="wait">
-                {isSuccess && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    className="p-3.5 rounded-lg bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-mono flex items-center gap-2.5"
-                  >
-                    <CheckCircle size={16} className="shrink-0" />
-                    <span>Signal dispatched successfully! I will respond shortly.</span>
-                  </motion.div>
-                )}
+            {status === 'success' && (
+              <p className="mt-5 rounded-lg border border-emerald-500/25 bg-emerald-500/5 px-4 py-3 text-sm text-emerald-500" role="status" aria-live="polite">
+                Message sent. I’ll get back to you shortly.
+              </p>
+            )}
 
-                {errorMessage && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    className="p-3.5 rounded-lg bg-rose-500/10 border border-rose-500/25 text-rose-400 text-xs font-mono flex items-center gap-2.5"
-                  >
-                    <AlertCircle size={16} className="shrink-0" />
-                    <span>{errorMessage}</span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+            {status === 'error' && (
+              <p className="mt-5 rounded-lg border border-red-500/25 bg-red-500/5 px-4 py-3 text-sm text-red-400" role="alert">
+                The message could not be sent. Please email me directly instead.
+              </p>
+            )}
 
-              {/* Submit Button */}
-              <button
-                type="submit"
-                disabled={isLoading}
-                className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-indigo-glow to-purple-glow hover:from-indigo-600 hover:to-purple-600 disabled:from-indigo-900 disabled:to-purple-900 text-neutral-50 rounded-xl font-medium shadow-lg transition-all duration-300 hover:scale-[1.01] disabled:cursor-not-allowed disabled:hover:scale-100 disabled:pointer-events-none cursor-pointer"
-              >
-                {isLoading ? (
-                  <>
-                    <Loader2 size={18} className="animate-spin text-neutral-50" />
-                    <span>Transmitting data...</span>
-                  </>
-                ) : (
-                  <>
-                    <Send size={16} />
-                    <span>Transmit Message</span>
-                  </>
-                )}
-              </button>
-            </form>
-          </div>
+            <button type="submit" disabled={status === 'loading'} className="primary-button mt-6 disabled:cursor-not-allowed disabled:opacity-60">
+              {status === 'loading' ? 'Sending…' : 'Send message'}
+              <Send size={16} />
+            </button>
+          </form>
         </div>
       </div>
     </section>

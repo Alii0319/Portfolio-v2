@@ -5,15 +5,19 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- SEO Meta Tags -->
-    <title>Ali Raza | Backend Developer & Machine Learning Engineer</title>
-    <meta name="description" content="Portfolio of Ali Raza, a high-caliber Software Engineer specializing in Django/DRF backend architectures, Redis/Celery background processing, and Machine Learning models." />
-    <meta name="keywords" content="Ali Raza, Software Engineer, Backend Developer, Django, DRF, Django REST Framework, Machine Learning, DevOps, Docker, Redis, Celery, XGBoost, Python, Bahawalpur, Pakistan" />
+    <title>Ali Raza | Backend Software Engineer</title>
+    <meta name="description" content="Ali Raza is a backend-focused software engineer working with Django, PostgreSQL, Redis, automation, and applied machine learning." />
     <meta name="author" content="Ali Raza" />
-    
-    <!-- Preconnect to Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta name="theme-color" content="#050a1b" />
+    <script>
+      try {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+        if (savedTheme === 'light' || (!savedTheme && prefersLight)) {
+          document.documentElement.classList.add('light');
+        }
+      } catch {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

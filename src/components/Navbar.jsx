@@ -1,269 +1,140 @@
-import { useState, useEffect } from 'react';
-import { Mail, Menu, X, Terminal, Sun, Moon } from 'lucide-react';
-import { Github, Linkedin } from './BrandIcons';
+import { useEffect, useState } from 'react';
+import { Download, Menu, Moon, Sun, X } from 'lucide-react';
+
+const navLinks = [
+  { label: 'About', href: '#hero', id: 'hero' },
+  { label: 'Projects', href: '#projects', id: 'projects' },
+  { label: 'Experience', href: '#experience', id: 'experience' },
+  { label: 'Skills', href: '#skills', id: 'skills' },
+  { label: 'Contact', href: '#contact', id: 'contact' },
+];
 
 export default function Navbar({ theme, toggleTheme }) {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
 
-  // Monitor scroll for visual adjustments
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-
-      // Check current section
-      const sections = ['hero', 'skills', 'experience', 'projects', 'contact'];
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 120 && rect.bottom >= 120) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => setScrolled(window.scrollY > 24);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: 'Root', href: '#hero', id: 'hero' },
-    { name: 'Skills', href: '#skills', id: 'skills' },
-    { name: 'Experience', href: '#experience', id: 'experience' },
-    { name: 'Projects', href: '#projects', id: 'projects' },
-    { name: 'Contact', href: '#contact', id: 'contact' },
-  ];
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
-  const handleLinkClick = (e, href) => {
-    e.preventDefault();
-    setIsOpen(false);
-    const target = document.querySelector(href);
-    if (target) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const targetRect = target.getBoundingClientRect().top;
-      const targetPosition = targetRect - bodyRect;
-      const offsetPosition = targetPosition - offset;
+        if (visible) setActiveSection(visible.target.id);
+      },
+      { rootMargin: '-20% 0px -65% 0px', threshold: [0, 0.1, 0.5] },
+    );
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      });
-    }
-  };
+    navLinks.forEach(({ id }) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setIsOpen(false);
+    };
+
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
+  }, []);
 
   return (
-    <>
-      <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? 'bg-midnight/70 backdrop-blur-md border-b border-white/5 py-4 shadow-lg shadow-black/20'
-            : 'bg-transparent py-6 border-b border-transparent'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            {/* Logo / Branding */}
-            <a
-              href="#hero"
-              onClick={(e) => handleLinkClick(e, '#hero')}
-              className="flex items-center gap-2 group font-mono font-bold text-lg text-white"
-            >
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-indigo-glow to-cyan-glow flex items-center justify-center shadow-md shadow-indigo-500/20 group-hover:scale-105 transition-transform duration-300">
-                <Terminal size={16} className="text-white" />
-              </div>
-              <span className="bg-gradient-to-r from-white to-gray-400 bg-clip-text text-transparent group-hover:to-white transition-all duration-300">
-                ali_raza<span className="text-indigo-glow">.py</span>
-              </span>
-            </a>
+    <header className={`site-header ${scrolled || isOpen ? 'site-header--scrolled' : ''}`}>
+      <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-5 sm:px-8" aria-label="Primary navigation">
+        <a href="#hero" className="group flex items-center gap-3" onClick={() => setIsOpen(false)}>
+          <span className="brand-mark">
+            AR
+            <span className="brand-status" aria-hidden="true" />
+          </span>
+          <span>
+            <span className="block text-sm font-semibold text-white sm:text-base">Ali Raza</span>
+            <span className="hidden text-xs text-gray-500 lg:block">Backend Software Engineer</span>
+          </span>
+        </a>
 
-            {/* Desktop Navigation Links */}
-            <div className="hidden md:flex items-center gap-8">
-              <div className="flex items-center gap-6">
-                {navLinks.map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.href}
-                    onClick={(e) => handleLinkClick(e, link.href)}
-                    className={`text-sm font-medium transition-all duration-300 relative py-1 ${
-                      activeSection === link.id
-                        ? 'text-white'
-                        : 'text-gray-400 hover:text-white'
-                    }`}
-                  >
-                    {link.name}
-                    {activeSection === link.id && (
-                      <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-indigo-glow to-cyan-glow rounded-full" />
-                    )}
-                  </a>
-                ))}
-              </div>
-
-              {/* Glowing System Status Indicator */}
-              <div className="h-4 w-[1px] bg-white/10" />
-
-              <div className="flex items-center gap-2 text-xs font-mono text-emerald-400 bg-emerald-500/10 px-3 py-1.5 rounded-full border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span>sys_status: operational</span>
-              </div>
-            </div>
-
-            {/* Socials Link Drawer (Desktop) */}
-            <div className="hidden md:flex items-center gap-3">
-              <a
-                href="https://github.com/Alii0319"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 hover:border-white/10 transition-all duration-300"
-                aria-label="GitHub"
-              >
-                <Github size={18} />
-              </a>
-              <a
-                href="https://linkedin.com/in/ali-raza-8a68372aa"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 hover:border-white/10 transition-all duration-300"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={18} />
-              </a>
-              <a
-                href="mailto:alirazaa0319@gmail.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 hover:border-white/10 transition-all duration-300"
-                aria-label="Email"
-              >
-                <Mail size={18} />
-              </a>
-
-              {/* Divider */}
-              <div className="h-4 w-[1px] bg-white/10" />
-
-              {/* Theme Toggle Button */}
-              <button
-                onClick={toggleTheme}
-                className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 hover:border-white/10 transition-all duration-300 cursor-pointer"
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? (
-                  <Sun size={18} className="text-amber-400 transition-transform duration-500 hover:rotate-45" />
-                ) : (
-                  <Moon size={18} className="text-indigo-glow transition-transform duration-500 hover:-rotate-12" />
-                )}
-              </button>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <div className="flex items-center md:hidden gap-2">
-              {/* Theme Toggle Button (Mobile) */}
-              <button
-                onClick={toggleTheme}
-                className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 transition-all duration-200 cursor-pointer"
-                aria-label="Toggle theme"
-              >
-                {theme === 'dark' ? (
-                  <Sun size={18} className="text-amber-400" />
-                ) : (
-                  <Moon size={18} className="text-indigo-glow" />
-                )}
-              </button>
-
-              <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 bg-emerald-500/10 px-2 py-1 rounded-full border border-emerald-500/20">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                <span>online</span>
-              </div>
-              
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 transition-all duration-200"
-                aria-label="Toggle menu"
-              >
-                {isOpen ? <X size={20} /> : <Menu size={20} />}
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Backdrop Overlay when mobile drawer is open */}
-      {isOpen && (
-        <div 
-          className="fixed inset-0 z-30 bg-black/40 dark:bg-black/60 backdrop-blur-xs md:hidden"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
-
-      {/* Mobile Drawer */}
-      <div
-        className={`fixed inset-y-0 right-0 z-40 w-64 border-l border-white/5 p-6 shadow-2xl transition-transform duration-300 md:hidden flex flex-col justify-between ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-        style={{ 
-          top: scrolled ? '69px' : '81px',
-          backgroundColor: theme === 'light' ? '#f3f4f6' : '#0b0f19'
-        }}
-      >
-        <div className="flex flex-col gap-6 mt-4">
+        <div className="hidden items-center gap-7 md:flex">
           {navLinks.map((link) => (
             <a
-              key={link.name}
+              key={link.id}
               href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href)}
-              className={`text-base font-medium py-2 border-b border-white/5 transition-all duration-250 ${
-                activeSection === link.id
-                  ? 'text-white pl-2 border-l-2 border-indigo-glow pl-4'
-                  : 'text-gray-400 hover:text-white pl-0'
-              }`}
+              className={`nav-link ${activeSection === link.id ? 'nav-link--active' : ''}`}
+              aria-current={activeSection === link.id ? 'location' : undefined}
             >
-              {link.name}
+              {link.label}
             </a>
           ))}
         </div>
 
-        {/* Social Icons inside Mobile drawer */}
-        <div className="flex flex-col gap-4 border-t border-white/5 pt-6">
-          <div className="text-xs text-gray-500 font-mono">CONNECT:</div>
-          <div className="flex items-center gap-4">
-            <a
-              href="https://github.com/Alii0319"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 transition-all duration-200"
-              aria-label="GitHub"
-            >
-              <Github size={20} />
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="icon-button"
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
+          >
+            {theme === 'dark' ? <Moon size={17} /> : <Sun size={17} />}
+          </button>
+
+          <div className="hidden sm:block">
+            <a href="/Ali_Raza_Backend.pdf" download="Ali_Raza_Backend.pdf" className="nav-resume">
+              <Download size={15} />
+              Resume
             </a>
-            <a
-              href="https://linkedin.com/in/ali-raza-8a68372aa"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 transition-all duration-200"
-              aria-label="LinkedIn"
+          </div>
+
+          <div className="md:hidden">
+            <button
+              type="button"
+              onClick={() => setIsOpen((current) => !current)}
+              className="icon-button"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isOpen}
+              aria-controls="mobile-navigation"
             >
-              <Linkedin size={20} />
-            </a>
+              {isOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
+        </div>
+      </nav>
+
+      {isOpen && (
+        <div id="mobile-navigation" className="mobile-navigation md:hidden">
+          <div className="mx-auto flex max-w-7xl flex-col px-5 py-4">
+            {navLinks.map((link) => (
+              <a
+                key={link.id}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className={`mobile-nav-link ${activeSection === link.id ? 'text-white' : ''}`}
+                aria-current={activeSection === link.id ? 'location' : undefined}
+              >
+                {link.label}
+              </a>
+            ))}
             <a
-              href="mailto:alirazaa0319@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/5 transition-all duration-200"
-              aria-label="Email"
+              href="/Ali_Raza_Backend.pdf"
+              download="Ali_Raza_Backend.pdf"
+              className="primary-button mt-4 sm:hidden"
+              onClick={() => setIsOpen(false)}
             >
-              <Mail size={20} />
+              <Download size={16} />
+              Download Resume
             </a>
           </div>
         </div>
-      </div>
-    </>
+      )}
+    </header>
   );
 }
