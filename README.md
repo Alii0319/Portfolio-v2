@@ -32,8 +32,14 @@ npm run build
 ```text
 public/
   ali_raza.webp
+  favicon.png
+  favicon.ico
+  apple-touch-icon.png
   Ali_Raza_Backend.pdf
 backups/
+  favicon/
+    favicon-original.svg
+    favicon-photo-source.png
   profile-image/
     ali_raza-original.png
 src/
