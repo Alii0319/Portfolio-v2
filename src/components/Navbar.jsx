@@ -88,7 +88,7 @@ export default function Navbar({ theme, toggleTheme }) {
           </button>
 
           <div className="hidden sm:block">
-            <a href="/Ali_Raza_Backend.pdf" download="Ali_Raza_Backend.pdf" className="nav-resume">
+            <a href="/Ali_Raza_Backend.pdf?v=2" download="Ali_Raza_Backend.pdf" className="nav-resume">
               <Download size={15} />
               Resume
             </a>
@@ -124,7 +124,7 @@ export default function Navbar({ theme, toggleTheme }) {
               </a>
             ))}
             <a
-              href="/Ali_Raza_Backend.pdf"
+              href="/Ali_Raza_Backend.pdf?v=2"
               download="Ali_Raza_Backend.pdf"
               className="primary-button mt-4 sm:hidden"
               onClick={() => setIsOpen(false)}

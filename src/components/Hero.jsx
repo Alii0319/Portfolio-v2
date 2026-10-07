@@ -38,7 +38,7 @@ export default function Hero() {
               <ArrowRight size={17} />
             </a>
             <a
-              href="/Ali_Raza_Backend.pdf"
+              href="/Ali_Raza_Backend.pdf?v=2"
               download="Ali_Raza_Backend.pdf"
               className="secondary-button"
             >
