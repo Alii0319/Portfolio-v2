@@ -1,33 +1,33 @@
 const skillGroups = [
   {
-    title: 'Backend',
-    description: 'API design, authentication, validation, and real-time application features.',
-    skills: ['Python', 'Django', 'Django REST Framework', 'REST APIs', 'JWT', 'Channels', 'WebSockets'],
+    title: 'Backend & Distributed Systems',
+    description: 'API architecture, authentication, real-time channels, and background task queues.',
+    skills: ['Python', 'Django 5', 'Django REST Framework', 'REST APIs', 'Channels', 'WebSockets', 'JWT', 'Gunicorn', 'Celery', 'PostgreSQL', 'Redis'],
   },
   {
-    title: 'Frontend',
-    description: 'Interfaces for consuming APIs, visualizing data, and managing application state.',
-    skills: ['TypeScript', 'React', 'Tailwind CSS', 'React Query', 'Axios', 'Recharts', 'Vite'],
+    title: 'DevOps, GitOps & Cloud',
+    description: 'Container orchestration, declarative GitOps delivery, security scans, and telemetry.',
+    skills: ['Kubernetes', 'Helm', 'ArgoCD', 'GitHub Actions', 'Docker', 'Docker Compose', 'Prometheus', 'Grafana', 'Trivy', 'Nginx', 'Linux'],
   },
   {
-    title: 'Automation & delivery',
-    description: 'Scheduled workloads, browser automation, containers, and deployment workflows.',
-    skills: ['Playwright', 'BeautifulSoup', 'Celery', 'Celery Beat', 'Docker', 'Docker Compose', 'Nginx'],
+    title: 'Automation & Web Scraping',
+    description: 'Scheduled pipelines, resilient browser automation, and high-cadence data extraction.',
+    skills: ['Playwright', 'BeautifulSoup', 'Celery Beat', 'Distributed Scraping', 'Dynamic DOM Extraction', 'Scheduled Workloads'],
   },
   {
-    title: 'Databases',
-    description: 'Relational and document databases, caching, query optimization, and product analytics.',
-    skills: ['PostgreSQL', 'Redis', 'MySQL', 'Oracle SQL', 'SQLite', 'MongoDB', 'Django ORM'],
+    title: 'Frontend & Interfaces',
+    description: 'Responsive client applications, state management, and real-time visualization.',
+    skills: ['React 19', 'TypeScript', 'Tailwind CSS', 'Vite', 'Axios Interceptors', 'React Router', 'Recharts'],
   },
   {
-    title: 'Machine learning',
-    description: 'Supervised and unsupervised workflows across structured data, computer vision, and language tasks.',
-    skills: ['Supervised ML', 'Unsupervised ML', 'scikit-learn', 'XGBoost', 'OpenCV', 'Computer Vision (CV)', 'NLP', 'pandas', 'NumPy', 'SMOTE', 'Model evaluation'],
+    title: 'Machine Learning & Data',
+    description: 'Supervised and unsupervised models, class balancing, feature engineering, and evaluation.',
+    skills: ['scikit-learn', 'XGBoost', 'Isolation Forest', 'SMOTE', 'pandas', 'NumPy', 'Matplotlib', 'EDA', 'Model Evaluation'],
   },
   {
-    title: 'Engineering practice',
-    description: 'Testing, collaboration, API integration, and deployment across modern hosting platforms.',
-    skills: ['Git', 'GitHub', 'Pytest', 'Unit testing', 'GitHub Actions', 'Linux', 'OpenAPI', 'Vercel', 'Railway', 'Render', 'Netlify', 'Gemini API'],
+    title: 'Databases & Storage',
+    description: 'Relational schemas, memory caching, query optimization, and transaction safety.',
+    skills: ['PostgreSQL', 'Redis', 'Oracle SQL', 'SQLite', 'MySQL', 'Django ORM', 'Query Optimization'],
   },
 ];
 
@@ -39,11 +39,11 @@ export default function Skills() {
           <p className="section-eyebrow">Capabilities</p>
           <h2 className="section-title">The stack behind the work.</h2>
           <p className="section-intro">
-            Technologies I use across backend systems, interfaces, data workflows, and deployment—grouped by their role in the system.
+            Technologies I use across backend systems, interfaces, data workflows, and deployment, grouped by their role in the system.
           </p>
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2">
+        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {skillGroups.map((group) => (
             <article key={group.title} className="skill-card">
               <div className="flex items-center justify-between">

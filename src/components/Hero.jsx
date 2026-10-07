@@ -6,18 +6,18 @@ import {
 } from 'lucide-react';
 import { Github, Linkedin } from './BrandIcons';
 
-const focusAreas = ['Django APIs', 'Automation', 'Data systems'];
+const focusAreas = ['Django & REST APIs', 'Kubernetes & GitOps', 'Real-Time Pipelines', 'React Interfaces'];
 
 export default function Hero() {
   return (
     <section id="hero" className="hero-section scroll-mt-18 border-b border-border pt-18">
       <div className="hero-grid" aria-hidden="true" />
 
-      <div className="relative mx-auto grid min-h-[calc(100svh-4.5rem)] max-w-7xl items-center gap-12 px-5 py-4 sm:px-8 sm:py-20 lg:grid-cols-12 lg:gap-20 lg:py-24">
+      <div className="relative mx-auto grid min-h-[min(44rem,calc(88svh-4.5rem))] max-w-7xl items-center gap-12 px-5 py-4 sm:px-8 sm:py-18 lg:grid-cols-12 lg:gap-20 lg:py-20">
         <div className="order-2 lg:order-1 lg:col-span-7">
           <div className="hero-pill">
             <span className="size-2 rounded-full bg-emerald-400" aria-hidden="true" />
-            Backend · Automation · Applied ML
+            Backend · DevOps &amp; GitOps · Real-Time Systems
           </div>
 
           <p className="mt-7 text-sm font-semibold uppercase tracking-[0.14em] text-gray-400">
@@ -25,11 +25,11 @@ export default function Hero() {
           </p>
 
           <h1 className="mt-3 max-w-3xl text-[2.65rem] font-semibold leading-[1.06] tracking-[-0.045em] text-white sm:text-6xl lg:text-[4.35rem]">
-            Building dependable backend systems for real products.
+            Backend-first engineer building reliable, automated systems.
           </h1>
 
           <p className="mt-7 max-w-2xl text-lg leading-8 text-gray-400 sm:text-xl sm:leading-9">
-            I turn product requirements into <strong className="font-medium text-white">Django APIs</strong>, scheduled data pipelines, and real-time features—then package them into systems people can actually run and maintain.
+            I build <strong className="font-medium text-white">Django APIs</strong>, scalable <strong className="font-medium text-white">Kubernetes &amp; GitOps</strong> pipelines, real-time features, and React interfaces—engineered to run reliably in production.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 sm:flex-row">
@@ -93,25 +93,25 @@ export default function Hero() {
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-accent">Featured build</p>
                   <h2 className="mt-2 text-lg font-semibold text-white">E-Commerce Scraper Engine</h2>
                 </div>
-                <span className="rounded-full border border-border px-2.5 py-1 font-mono text-[10px] text-gray-500">Public</span>
+                <span className="rounded-full border border-border px-2.5 py-1 font-mono text-[10px] text-gray-500">GitOps Ready</span>
               </div>
 
               <p className="mt-4 text-sm leading-6 text-gray-400">
-                Scheduled storefront monitoring with browser automation, price history, and real-time alerts.
+                Scheduled storefront scraper on Kubernetes with Helm &amp; ArgoCD GitOps, 4h Celery Beat scans, and real-time Channels alerts.
               </p>
 
               <div className="mt-5 hidden grid-cols-3 gap-2 border-y border-border py-4 text-center sm:grid">
                 <div>
-                  <p className="text-base font-semibold text-white">6</p>
-                  <p className="mt-1 text-[10px] uppercase tracking-wide text-gray-500">services</p>
+                  <p className="text-base font-semibold text-white">K8s &amp; Helm</p>
+                  <p className="mt-1 text-[10px] uppercase tracking-wide text-gray-500">GitOps / ArgoCD</p>
                 </div>
                 <div className="border-x border-border">
                   <p className="text-base font-semibold text-white">4h</p>
-                  <p className="mt-1 text-[10px] uppercase tracking-wide text-gray-500">schedule</p>
+                  <p className="mt-1 text-[10px] uppercase tracking-wide text-gray-500">scrape cadence</p>
                 </div>
                 <div>
-                  <p className="text-base font-semibold text-white">12</p>
-                  <p className="mt-1 text-[10px] uppercase tracking-wide text-gray-500">tests</p>
+                  <p className="text-base font-semibold text-white">42</p>
+                  <p className="mt-1 text-[10px] uppercase tracking-wide text-gray-500">CI/CD tests</p>
                 </div>
               </div>
 

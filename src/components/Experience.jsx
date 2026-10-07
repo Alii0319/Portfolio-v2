@@ -1,9 +1,10 @@
 import { Award } from 'lucide-react';
 
 const experienceBullets = [
-  'Built and maintained more than five Django REST API modules for internal business workflows.',
-  'Improved ORM query performance and strengthened backend data reliability across SQLite and Oracle-backed features.',
-  'Debugged API and deployment issues while contributing through a shared Git and GitHub workflow.',
+  'Engineered 5+ Django REST API modules and CRUD systems for business workflows using Python, SQLite, and Oracle.',
+  'Optimized Django ORM models and database queries, enhancing backend data reliability, response speed, and query performance.',
+  'Cut post-deployment defects by 20% by leading systematic API debugging, automated test checks, and Git/GitHub best practices.',
+  'Designed and maintained scalable database models and clean application architecture to reduce manual processing.',
 ];
 
 const metrics = [
@@ -53,7 +54,7 @@ export default function Experience() {
           <p className="section-eyebrow">Experience</p>
           <h2 className="section-title">Experience grounded in delivery.</h2>
           <p className="section-intro">
-            Production backend work, a software engineering degree, and focused technical coursework—all reinforcing the same direction.
+            Production backend work, a software engineering degree, and focused technical coursework in the same direction.
           </p>
         </div>
 
@@ -111,27 +112,27 @@ export default function Experience() {
             <div className="flex flex-col gap-5 border-b border-border pb-7 sm:flex-row sm:items-end sm:justify-between">
               <div>
                 <span className="rounded-full border border-border px-3 py-1 text-xs text-gray-400">Credentials</span>
-                <h3 className="mt-5 text-2xl font-semibold tracking-[-0.025em] text-white">Selected certifications</h3>
-                <p className="mt-2 text-sm leading-6 text-gray-500">Focused coursework from IBM and DeepLearning.AI.</p>
+                <h3 className="mt-5 text-2xl font-semibold tracking-[-0.025em] text-white">Relevant certifications</h3>
+                <p className="mt-2 text-sm leading-6 text-gray-500">Coursework across machine learning, databases, statistics, and AI fundamentals.</p>
               </div>
               <p className="text-sm text-gray-500">6 completed courses</p>
             </div>
 
             <ul className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-                {certifications.map((certification) => (
-                  <li key={certification.name} className="certification-card">
-                    <div className="flex items-start justify-between gap-4">
-                      <span className="certification-icon" aria-hidden="true">
-                        <Award size={18} />
-                      </span>
-                      <span className="rounded-full border border-border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-gray-500">
-                        {certification.issuer}
-                      </span>
-                    </div>
-                    <p className="mt-6 text-base font-semibold leading-6 text-white">{certification.name}</p>
-                    <p className="certification-area">{certification.area}</p>
-                  </li>
-                ))}
+              {certifications.map((certification) => (
+                <li key={certification.name} className="certification-card">
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="certification-icon" aria-hidden="true">
+                      <Award size={18} />
+                    </span>
+                    <span className="rounded-full border border-border px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-gray-500">
+                      {certification.issuer}
+                    </span>
+                  </div>
+                  <p className="mt-6 text-base font-semibold leading-6 text-white">{certification.name}</p>
+                  <p className="certification-area">{certification.area}</p>
+                </li>
+              ))}
             </ul>
           </article>
         </div>
